@@ -1,6 +1,6 @@
 # Bienvenido a Noticias GC
 
-## _¿Qué es Weather Query App?_
+## _¿Qué es Noticias GC?_
 
 Es una página web donde podrás encontrar las últimas noticias del mundo. Al registrarte e iniciar sesión, tendrás la posibilidad de archivar las noticias que no te interesen.
 
@@ -8,9 +8,7 @@ Es una página web donde podrás encontrar las últimas noticias del mundo. Al r
 
 - Registro y login.
 - Archivar noticias que no sean de tu interés (en construcción)
-- Recuperar la lista de ciudades guardadas.
-- Eliminar una ciudad de la lista.
-- Acceder a los datos del clima de la ciudad seleccionada.
+- Búsqueda de noticias por etiquetas específicas
 
 ### _¿Querés probarla?_
 
@@ -27,13 +25,13 @@ NodeJs v14 o superior [Descargar NodeJS](https://nodejs.org/es/download/)
 _Instalar el proyecto, en la linea de comandos (CMD) copiar y pegar_
 
 ```
-git clone https://github.com/rociobmartin92/Weather-Query-React-Native.git
+git clone https://github.com/gastoncolaneri/noticiasGC
 ```
 
 _Moverse a la carpeta del proyecto_
 
 ```
-cd Weather-Query-React-Native
+cd noticiasGC
 ```
 
 _Instalar dependencias_
