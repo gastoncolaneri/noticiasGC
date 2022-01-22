@@ -57,6 +57,4 @@ Se utilizó [Git](https://git-scm.com/) y [Github](https://github.com) para el c
 
 ## Autor ✒️
 
-\_Gastón Colaneri
-
 - **Gastón Colaneri** - [gastoncolaneri](https://github.com/gastoncolaneri)
