@@ -44,7 +44,6 @@ _Iniciar el proyecto_
 
 ```
 npm start
-
 ```
 
 - [ReactJS](https://es.reactjs.org/) - Framework utilizado para el desarrollo de la web.
