@@ -2,13 +2,6 @@ import { makeStyles } from '@mui/styles';
 import colors from '../../utils/colors';
 
 export const generalStyles = makeStyles((theme) => ({
-  banner: {
-    width: '100%',
-    height: '100%',
-  },
-  container: {
-    backgroundColor: colors.COLOR_PRINCIPAL,
-  },
   grid: {
     textAlign: 'center',
     paddingRight: 10,
@@ -18,5 +11,6 @@ export const generalStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundColor: colors.COLOR_SECUNDARIO,
     padding: 40,
+    bottom: 0,
   },
 }));

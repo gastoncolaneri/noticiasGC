@@ -1,11 +1,11 @@
 import React from 'react';
-import { generalStyles } from './Contact.styles';
+import { generalStyles } from './AddNews.styles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { Button, TextField, Typography } from '@mui/material';
 
-export default function Contact() {
+export default function Register() {
   const classes = generalStyles();
 
   return (
@@ -23,75 +23,35 @@ export default function Contact() {
               className={classes.contactCard}
             >
               <Typography variant="h4" sx={{ marginBottom: 3 }}>
-                Contactate con nosotros!
+                Subí tu noticia
               </Typography>
               <Grid container xs={12} spacing={2} justifyContent="center">
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     id="outlined-required"
-                    label="Nombre"
+                    label="Título"
                     variant="outlined"
                     color="secondary"
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     id="outlined-required"
-                    label="Apellido"
+                    label="Categoría"
                     variant="outlined"
                     color="secondary"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <TextField
-                    required
-                    id="outlined-required"
-                    label="Correo electrónico"
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <TextField
-                    id="outlined-required"
-                    label="Cod.Area"
-                    variant="outlined"
-                    color="secondary"
-                    type="number"
-                    fullWidth
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={4}>
-                  <TextField
-                    id="outlined-required"
-                    label="Teléfono"
-                    variant="outlined"
-                    color="secondary"
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <TextField
-                    id="outlined-required"
-                    label="Celular"
-                    variant="outlined"
-                    color="secondary"
-                    type="number"
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    required
                     id="outlined-textarea"
-                    label="Ingrese su consulta"
+                    label="Descripción"
                     color="secondary"
-                    maxRows={6}
                     rows={3}
                     multiline
                     fullWidth

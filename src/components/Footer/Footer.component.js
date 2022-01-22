@@ -13,16 +13,24 @@ export default function NavBar() {
     <Box className={classes.containerFooter}>
       <Grid container justifyContent="center" sx={{ marginBottom: 1 }}>
         <Grid item className={classes.grid}>
-          <FacebookIcon color="primary" sx={{ fontSize: 30 }} />
+          <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+            <FacebookIcon color="primary" sx={{ fontSize: 30 }} />
+          </a>
         </Grid>
         <Grid item className={classes.grid}>
-          <WhatsAppIcon color="primary" sx={{ fontSize: 30 }} />
+          <a href="https://www.whatsapp.com" target="_blank" rel="noreferrer">
+            <WhatsAppIcon color="primary" sx={{ fontSize: 30 }} />
+          </a>
         </Grid>
         <Grid item className={classes.grid}>
-          <TwitterIcon color="primary" sx={{ fontSize: 30 }} />
+          <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+            <TwitterIcon color="primary" sx={{ fontSize: 30 }} />
+          </a>
         </Grid>
         <Grid item className={classes.grid}>
-          <InstagramIcon color="primary" sx={{ fontSize: 30 }} />
+          <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+            <InstagramIcon color="primary" sx={{ fontSize: 30 }} />
+          </a>
         </Grid>
       </Grid>
       <Grid container justifyContent="center">

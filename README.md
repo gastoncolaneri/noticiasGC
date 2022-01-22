@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Bienvenido a Noticias GC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## _¿Qué es Weather Query App?_
 
-## Available Scripts
+Es una página web donde podrás encontrar las últimas noticias del mundo. Al registrarte e iniciar sesión, tendrás la posibilidad de archivar las noticias que no te interesen.
 
-In the project directory, you can run:
+## _¿Qué funcionalidades tiene?_
 
-### `npm start`
+- Registro y login.
+- Archivar noticias que no sean de tu interés (en construcción)
+- Recuperar la lista de ciudades guardadas.
+- Eliminar una ciudad de la lista.
+- Acceder a los datos del clima de la ciudad seleccionada.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### _¿Querés probarla?_
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+_Seguí los siguientes pasos_
 
-### `npm test`
+## Pre-requisitos 📋
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+_Necesitas para que funcione en tu entorno local.._
 
-### `npm run build`
+NodeJs v14 o superior [Descargar NodeJS](https://nodejs.org/es/download/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Instalación 🔧
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+_Instalar el proyecto, en la linea de comandos (CMD) copiar y pegar_
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/rociobmartin92/Weather-Query-React-Native.git
+```
 
-### `npm run eject`
+_Moverse a la carpeta del proyecto_
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+cd Weather-Query-React-Native
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+_Instalar dependencias_
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+_Iniciar el proyecto_
 
-## Learn More
+```
+npm start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [ReactJS](https://es.reactjs.org/) - Framework utilizado para el desarrollo de la web.
+- [Material UI](https://mui.com/) - Librería de componentes de ReactJS
+- [News API](https://newsapi.org/) - API para obtener las noticias.
+- [Firebase](https://www.sqlite.org/index.html) - Autenticación de usuarios.
 
-### Code Splitting
+## Versionado 📌
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Se utilizó [Git](https://git-scm.com/) y [Github](https://github.com) para el control de versionado.
 
-### Analyzing the Bundle Size
+## Autor ✒️
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+\_Gastón Colaneri
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Gastón Colaneri** - [gastoncolaneri](https://github.com/gastoncolaneri)

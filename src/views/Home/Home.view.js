@@ -26,19 +26,30 @@ export default function Home() {
       <Box className={classes.container}>
         <Container>
           <Grid container justifyContent="center">
-            <Grid item xs={6} textAlign="center">
+            <Grid
+              item
+              xs={12}
+              sm={8}
+              textAlign="center"
+              className={classes.card}
+            >
               <Typography variant="h3">Bienvenido a Noticias GC!</Typography>
               <Typography variant="h6">
                 En este portal vas a encontrar las últimas noticias del mundo,
                 teniendo la posibilidad de archivar aquellas que no son de tu
                 interés.
               </Typography>
-              <Grid item xs={12} sx={{ marginTop: 3, marginBottom: 30 }}>
-                <Stack spacing={5} direction="row" justifyContent="center">
-                  <LinkButton to="/news">Noticias nuevas</LinkButton>
-                  <LinkButton to="/archivedNews">
-                    Noticias archivadas
-                  </LinkButton>
+              <Grid item xs={12} sx={{ marginTop: 2, marginBottom: 4 }}>
+                <LinkButton to="/news">Noticias nuevas</LinkButton>
+              </Grid>
+              <Typography variant="h6">
+                Primero vas a tener que iniciar sesión, o registrarte en caso de
+                no tener un usuario creado.
+              </Typography>
+              <Grid item xs={12} sx={{ marginTop: 2, marginBottom: 4 }}>
+                <Stack spacing={2} direction="row" justifyContent="center">
+                  <LinkButton to="/register">Registrarse</LinkButton>
+                  <LinkButton to="/login">Iniciar sesión</LinkButton>
                 </Stack>
               </Grid>
             </Grid>
