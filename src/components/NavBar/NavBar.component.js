@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Logo from '../../assets/NoticiasGC2.png';
-import { generalStyles } from './NavBar.styles';
-import colors from '../../utils/colors';
-import { Alert, Divider, Snackbar } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
-import { app } from '../../utils/Firebase';
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Logo from "../../assets/NoticiasGC2.png";
+import { generalStyles } from "./NavBar.styles";
+import colors from "../../utils/colors";
+import { Alert, Divider, Snackbar } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
+import { app } from "../../utils/Firebase";
 
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import Loader from '../Loader/Loader.component';
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import Loader from "../Loader/Loader.component";
 
 export default function NavBar() {
   const classes = generalStyles();
@@ -29,8 +29,8 @@ export default function NavBar() {
   const [userLogin, setUserLogin] = useState(null);
   const [open, setOpen] = useState(false);
   const [openLoader, setOpenLoader] = useState(false);
-  const [typeAlert, setTypeAlert] = useState('success');
-  const [messageAlert, setMessageAlert] = useState('');
+  const [typeAlert, setTypeAlert] = useState("success");
+  const [messageAlert, setMessageAlert] = useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -49,7 +49,7 @@ export default function NavBar() {
   };
 
   const handleCloseAlert = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpen(false);
@@ -58,7 +58,7 @@ export default function NavBar() {
     return (
       <Button
         onClick={handleCloseNavMenu}
-        sx={{ my: 2, color: 'white', display: 'block' }}
+        sx={{ my: 2, color: "white", display: "block" }}
         component={NavLink}
         style={({ isActive }) =>
           isActive
@@ -76,19 +76,20 @@ export default function NavBar() {
   const logOut = () => {
     signOut(auth)
       .then(() => {
-        setTypeAlert('success');
-        setMessageAlert('Ha cerrado sesión correctamente');
+        setTypeAlert("success");
+        setMessageAlert("Ha cerrado sesión correctamente");
         setOpen(true);
         setOpenLoader(true);
+        setAnchorEl(null);
         setTimeout(() => {
           setOpenLoader(false);
-          navigate('/');
+          navigate("/");
         }, 2000);
       })
       .catch(() => {
         setOpen(true);
-        setTypeAlert('error');
-        setMessageAlert('Ha ocurrido un error, por favor vuelva a intentarlo');
+        setTypeAlert("error");
+        setMessageAlert("Ha ocurrido un error, por favor vuelva a intentarlo");
       });
   };
 
@@ -96,14 +97,14 @@ export default function NavBar() {
     onAuthStateChanged(auth, (user) => {
       user ? setUserLogin(true) : setUserLogin(false);
     });
-  }, [userLogin]);
+  }, [auth, userLogin]);
 
   return (
     <>
       <AppBar position="sticky" color="secondary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -118,23 +119,23 @@ export default function NavBar() {
                 id="menu-appbar"
                 anchorEl={anchorElNav}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
+                  vertical: "bottom",
+                  horizontal: "left",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
+                  vertical: "top",
+                  horizontal: "left",
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: 'block', md: 'none' },
+                  display: { xs: "block", md: "none" },
                 }}
               >
                 <LinkButton
                   to="/"
-                  sx={{ color: colors.COLOR_SECUNDARIO, display: 'block' }}
+                  sx={{ color: colors.COLOR_SECUNDARIO, display: "block" }}
                 >
                   Inicio
                 </LinkButton>
@@ -142,7 +143,7 @@ export default function NavBar() {
 
                 <LinkButton
                   to="/news"
-                  sx={{ color: colors.COLOR_SECUNDARIO, display: 'block' }}
+                  sx={{ color: colors.COLOR_SECUNDARIO, display: "block" }}
                 >
                   Noticias
                 </LinkButton>
@@ -152,8 +153,8 @@ export default function NavBar() {
             <Box
               sx={{
                 flexGrow: 1,
-                display: { xs: 'none', md: 'flex' },
-                alignItems: 'center',
+                display: { xs: "none", md: "flex" },
+                alignItems: "center",
               }}
             >
               <NavLink to="/">
@@ -178,20 +179,20 @@ export default function NavBar() {
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
+                    vertical: "bottom",
+                    horizontal: "right",
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                   }}
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
                   <LinkButton
                     to="/addNews"
-                    sx={{ color: colors.COLOR_SECUNDARIO, display: 'block' }}
+                    sx={{ color: colors.COLOR_SECUNDARIO, display: "block" }}
                     onClick={handleClose}
                   >
                     Agregar noticia
@@ -200,7 +201,7 @@ export default function NavBar() {
 
                   <LinkButton
                     to="/archivedNews"
-                    sx={{ color: colors.COLOR_SECUNDARIO, display: 'block' }}
+                    sx={{ color: colors.COLOR_SECUNDARIO, display: "block" }}
                     onClick={handleClose}
                   >
                     Noticias archivada
@@ -209,7 +210,7 @@ export default function NavBar() {
 
                   <LinkButton
                     to="/"
-                    sx={{ color: colors.COLOR_SECUNDARIO, display: 'block' }}
+                    sx={{ color: colors.COLOR_SECUNDARIO, display: "block" }}
                     onClick={logOut}
                   >
                     Cerrar sesión
@@ -217,7 +218,12 @@ export default function NavBar() {
                 </Menu>
               </div>
             ) : (
-              <LinkButton to="/login">Iniciar Sesión</LinkButton>
+              <>
+                <LinkButton to="/register" sx={{ mr: 2 }}>
+                  Registrarse
+                </LinkButton>
+                <LinkButton to="/login">Iniciar Sesión</LinkButton>
+              </>
             )}
           </Toolbar>
         </Container>
@@ -227,14 +233,14 @@ export default function NavBar() {
         autoHideDuration={2000}
         onClose={handleCloseAlert}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
       >
         <Alert
           onClose={handleCloseAlert}
           severity={typeAlert}
-          sx={{ width: '100%' }}
+          sx={{ width: "100%" }}
         >
           {messageAlert}
         </Alert>

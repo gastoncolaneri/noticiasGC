@@ -15,7 +15,7 @@ export const generalStyles = makeStyles((theme) => ({
     borderColor: colors.GREY_BOX_SHADOW,
     padding: 15,
     boxShadow: '3px 5px 5px #9E9E9E',
-    backgroundColor: colors.LIGHTGREY,
+    backgroundColor: colors.LIGHTORANGE,
     marginBottom: 20,
   },
 }));

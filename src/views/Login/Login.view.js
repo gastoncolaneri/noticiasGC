@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { generalStyles } from './Login.styles';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
+import React, { useState } from "react";
+import { generalStyles } from "./Login.styles";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import {
   Alert,
   Button,
@@ -10,29 +10,29 @@ import {
   Snackbar,
   TextField,
   Typography,
-} from '@mui/material';
-import { app } from '../../utils/Firebase';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { AccountCircle } from '@mui/icons-material';
-import LockRoundedIcon from '@mui/icons-material/LockRounded';
-import { emailValidation } from '../../utils/validations';
-import { isEmpty } from 'lodash';
-import Loader from '../../components/Loader/Loader.component';
+} from "@mui/material";
+import { app } from "../../utils/Firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { AccountCircle } from "@mui/icons-material";
+import LockRoundedIcon from "@mui/icons-material/LockRounded";
+import { emailValidation } from "../../utils/validations";
+import { isEmpty } from "lodash";
+import Loader from "../../components/Loader/Loader.component";
 
 export default function Login() {
   const classes = generalStyles();
   const auth = getAuth(app);
   const [open, setOpen] = useState(false);
   const [openLoader, setOpenLoader] = useState(false);
-  const [typeAlert, setTypeAlert] = useState('success');
-  const [messageAlert, setMessageAlert] = useState('');
+  const [typeAlert, setTypeAlert] = useState("success");
+  const [messageAlert, setMessageAlert] = useState("");
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpen(false);
@@ -40,18 +40,18 @@ export default function Login() {
 
   const onSubmit = () => {
     if (isEmpty(formData.email) || isEmpty(formData.password)) {
-      setTypeAlert('error');
-      setMessageAlert('Todos los datos son requeridos');
+      setTypeAlert("error");
+      setMessageAlert("Todos los datos son requeridos");
       setOpen(true);
     } else if (!emailValidation(formData.email)) {
-      setTypeAlert('error');
-      setMessageAlert('Por favor ingrese un correo válido');
+      setTypeAlert("error");
+      setMessageAlert("Por favor ingrese un correo válido");
       setOpen(true);
     } else {
       signInWithEmailAndPassword(auth, formData.email, formData.password)
         .then((userCredential) => {
-          setTypeAlert('success');
-          setMessageAlert('Se inició sesión correctamente');
+          setTypeAlert("success");
+          setMessageAlert("Se inició sesión correctamente");
           setOpen(true);
           setOpenLoader(true);
           setTimeout(() => {
@@ -59,8 +59,8 @@ export default function Login() {
           }, 2000);
         })
         .catch(() => {
-          setTypeAlert('error');
-          setMessageAlert('Correo o contraseña inválidos');
+          setTypeAlert("error");
+          setMessageAlert("Correo o contraseña inválidos");
           setOpen(true);
         });
     }
@@ -98,7 +98,7 @@ export default function Login() {
                       type="email"
                       variant="outlined"
                       color="secondary"
-                      onChange={(e) => onChange(e, 'email')}
+                      onChange={(e) => onChange(e, "email")}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -117,7 +117,7 @@ export default function Login() {
                       variant="outlined"
                       color="secondary"
                       type="password"
-                      onChange={(e) => onChange(e, 'password')}
+                      onChange={(e) => onChange(e, "password")}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -148,14 +148,14 @@ export default function Login() {
         autoHideDuration={2000}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
       >
         <Alert
           onClose={handleClose}
           severity={typeAlert}
-          sx={{ width: '100%' }}
+          sx={{ width: "100%" }}
         >
           {messageAlert}
         </Alert>

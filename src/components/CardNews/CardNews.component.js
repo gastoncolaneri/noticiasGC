@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -8,48 +8,56 @@ import {
   ToggleButtonGroup,
   Tooltip,
   Typography,
-} from '@mui/material';
-import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
-import { generalStyles } from './CardNews.style';
-import Loader from '../Loader/Loader.component';
+} from "@mui/material";
+import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { generalStyles } from "./CardNews.style";
+import { app } from "../../utils/Firebase";
+
+import Loader from "../Loader/Loader.component";
+import NewsContext from "../../context/news/NewsContext";
 
 export default function CarNews() {
+  const newsContext = useContext(NewsContext);
+  const {
+    getNews,
+    allNews,
+    changeTypeNews,
+    changeCountryNews,
+    typeNews,
+    countryNews,
+    isLoading,
+    archiveNews,
+  } = newsContext;
+  const auth = getAuth(app);
   const classes = generalStyles();
+  const [userLogin, setUserLogin] = useState(null);
   const [news, setNews] = useState([]);
-  const [openLoader, setOpenLoader] = useState(false);
-  const [paramUrl, setparamUrl] = useState('business');
-  const [paramUrl2, setparamUrl2] = useState('ar');
-  const [urlGetNews, setUrlGetNews] = useState(
-    `https://newsapi.org/v2/top-headlines?country=${paramUrl2}&category=${paramUrl}&apiKey=e3b5b11d4944459fac8192812ab214c4&sortBy=publishedAt`
-  );
 
-  const handleChange = (event, newparamUrl) => {
-    setparamUrl(newparamUrl);
+  const changeType = (event, newparamUrl) => {
+    changeTypeNews(newparamUrl);
   };
 
-  const handleChange2 = (event, newparamUrl) => {
-    setparamUrl2(newparamUrl);
+  const changeCountry = (event, newparamUrl) => {
+    changeCountryNews(newparamUrl);
   };
 
-  async function newsService() {
-    let apiRequest = await fetch(urlGetNews);
-    let response = await apiRequest.json();
-    return response;
-  }
+  useEffect(() => {
+    getNews();
+    // eslint-disable-next-line
+  }, [typeNews, countryNews]);
 
   useEffect(() => {
-    setUrlGetNews(
-      `https://newsapi.org/v2/top-headlines?country=${paramUrl2}&category=${paramUrl}&apiKey=e3b5b11d4944459fac8192812ab214c4&sortBy=publishedAt`
-    );
-  }, [paramUrl, paramUrl2]);
+    if (allNews?.length) {
+      setNews(allNews);
+    }
+  }, [allNews]);
 
   useEffect(() => {
-    setOpenLoader(true);
-    newsService().then((response) => {
-      setNews(response.articles);
-      setOpenLoader(false);
+    onAuthStateChanged(auth, (user) => {
+      user ? setUserLogin(true) : setUserLogin(false);
     });
-  }, [urlGetNews]);
+  }, [auth, userLogin]);
 
   return (
     <>
@@ -64,7 +72,7 @@ export default function CarNews() {
             <Typography
               variant="h5"
               sx={{
-                fontWeight: '600',
+                fontWeight: "600",
               }}
             >
               ETIQUETAS
@@ -72,9 +80,8 @@ export default function CarNews() {
             <Stack direction="row">
               <ToggleButtonGroup
                 color="secondary"
-                value={paramUrl}
                 exclusive
-                onChange={handleChange}
+                onChange={changeType}
                 sx={{ marginBottom: 2, marginRight: 2 }}
               >
                 <ToggleButton value="business">Negocios</ToggleButton>
@@ -83,9 +90,8 @@ export default function CarNews() {
               </ToggleButtonGroup>
               <ToggleButtonGroup
                 color="secondary"
-                value={paramUrl2}
                 exclusive
-                onChange={handleChange2}
+                onChange={changeCountry}
                 sx={{ marginBottom: 2, marginRight: 2 }}
               >
                 <ToggleButton value="ar">Argentina</ToggleButton>
@@ -97,21 +103,26 @@ export default function CarNews() {
               return (
                 <Grid xs={12} className={classes.card}>
                   <Box>
-                    <Tooltip title="Archivar noticia">
-                      <ArchiveOutlinedIcon
-                        color="secondary"
-                        sx={{ marginRight: 2 }}
-                      />
-                    </Tooltip>
+                    {userLogin && (
+                      <Tooltip title="Archivar noticia">
+                        <ArchiveOutlinedIcon
+                          color="secondary"
+                          sx={{ marginRight: 2 }}
+                          onClick={() => {
+                            archiveNews(item);
+                          }}
+                        />
+                      </Tooltip>
+                    )}
                     <Typography
                       variant="h5"
                       sx={{
-                        display: 'inline',
-                        fontWeight: '600',
+                        display: "inline",
+                        fontWeight: "600",
                         marginBottom: 10,
                       }}
                     >
-                      {item.title ? item.title : 'Sin título'}
+                      {item.title ? item.title : "Sin título"}
                     </Typography>
 
                     <Typography
@@ -124,7 +135,7 @@ export default function CarNews() {
                     </Typography>
                     <Box textAlign="right">
                       <Typography variant="subtitle1">
-                        Autor: {item.author ? item.author : 'Anónimo'}
+                        Autor: {item.author ? item.author : "Anónimo"}
                       </Typography>
                       <Typography variant="subtitle2">
                         Creada: {item.publishedAt.slice(0, 10)}
@@ -137,7 +148,7 @@ export default function CarNews() {
           </Grid>
         </Container>
       </Box>
-      <Loader open={openLoader} />
+      <Loader open={isLoading} />
     </>
   );
 }
