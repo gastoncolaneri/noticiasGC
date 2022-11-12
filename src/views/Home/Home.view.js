@@ -1,13 +1,16 @@
-import React from 'react';
-import { generalStyles } from './Home.styles';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Banner from '../../assets/Banner.png';
-import { Button, Stack, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from "react";
+import { generalStyles } from "./Home.styles";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Banner from "../../assets/Banner.png";
+import { Button, Stack, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import UserContext from "../../context/user/UserContext";
 
 export default function Home() {
+  const userContext = useContext(UserContext);
+  const { isUserLogged } = userContext;
   const classes = generalStyles();
   const LinkButton = (props) => {
     return (
@@ -42,16 +45,21 @@ export default function Home() {
               <Grid item xs={12} sx={{ marginTop: 2, marginBottom: 4 }}>
                 <LinkButton to="/news">Noticias nuevas</LinkButton>
               </Grid>
-              <Typography variant="h6">
-                Primero vas a tener que iniciar sesión, o registrarte en caso de
-                no tener un usuario creado.
-              </Typography>
-              <Grid item xs={12} sx={{ marginTop: 2, marginBottom: 4 }}>
-                <Stack spacing={2} direction="row" justifyContent="center">
-                  <LinkButton to="/register">Registrarse</LinkButton>
-                  <LinkButton to="/login">Iniciar sesión</LinkButton>
-                </Stack>
-              </Grid>
+
+              {!isUserLogged && (
+                <>
+                  <Typography variant="h6">
+                    Primero vas a tener que iniciar sesión, o registrarte en
+                    caso de no tener un usuario creado.
+                  </Typography>
+                  <Grid item xs={12} sx={{ marginTop: 2, marginBottom: 4 }}>
+                    <Stack spacing={2} direction="row" justifyContent="center">
+                      <LinkButton to="/register">Registrarse</LinkButton>
+                      <LinkButton to="/login">Iniciar sesión</LinkButton>
+                    </Stack>
+                  </Grid>
+                </>
+              )}
             </Grid>
           </Grid>
         </Container>

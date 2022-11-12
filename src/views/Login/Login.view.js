@@ -1,16 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { generalStyles } from "./Login.styles";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import {
-  Alert,
-  Button,
-  InputAdornment,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { app } from "../../utils/Firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { AccountCircle } from "@mui/icons-material";
@@ -18,8 +11,12 @@ import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { emailValidation } from "../../utils/validations";
 import { isEmpty } from "lodash";
 import Loader from "../../components/Loader/Loader.component";
+import UserContext from "../../context/user/UserContext";
+import CustomSnackbar from "../../components/Snackbar/CustomSnackbar.component";
 
 export default function Login() {
+  const userContext = useContext(UserContext);
+  const { userLogin } = userContext;
   const classes = generalStyles();
   const auth = getAuth(app);
   const [open, setOpen] = useState(false);
@@ -30,13 +27,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
 
   const onSubmit = () => {
     if (isEmpty(formData.email) || isEmpty(formData.password)) {
@@ -55,6 +45,7 @@ export default function Login() {
           setOpen(true);
           setOpenLoader(true);
           setTimeout(() => {
+            userLogin(true);
             setOpenLoader(false);
           }, 2000);
         })
@@ -143,23 +134,12 @@ export default function Login() {
           </Grid>
         </Container>
       </Box>
-      <Snackbar
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={typeAlert}
-          sx={{ width: "100%" }}
-        >
-          {messageAlert}
-        </Alert>
-      </Snackbar>
+      <CustomSnackbar
+        isOpen={open}
+        setIsOpen={setOpen}
+        messageAlert={messageAlert}
+        typeAlert={typeAlert}
+      />
       <Loader open={openLoader} />
     </>
   );

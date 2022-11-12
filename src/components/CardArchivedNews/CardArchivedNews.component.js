@@ -1,15 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Container, Grid, Tooltip, Typography } from "@mui/material";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { generalStyles } from "./CardArchivedNews.style";
 import Loader from "../Loader/Loader.component";
 import NewsContext from "../../context/news/NewsContext";
+import { getArchivedNewsLS } from "../../utils/localStorage";
+import CustomSnackbar from "../Snackbar/CustomSnackbar.component";
 
 export default function CardArchivedNews() {
+  const [open, setOpen] = useState(false);
   const newsContext = useContext(NewsContext);
-  const { archivedNews, isLoading, deleteNews } = newsContext;
+  const { isLoading, deleteNews } = newsContext;
   const classes = generalStyles();
-  console.log(archivedNews);
+  const archivedNews = getArchivedNewsLS();
 
   return (
     <>
@@ -27,6 +30,7 @@ export default function CardArchivedNews() {
                           sx={{ marginRight: 2 }}
                           onClick={() => {
                             deleteNews(item);
+                            setOpen(true);
                           }}
                         />
                       </Tooltip>
@@ -67,6 +71,13 @@ export default function CardArchivedNews() {
           </Grid>
         </Container>
       </Box>
+      <CustomSnackbar
+        isOpen={open}
+        setIsOpen={setOpen}
+        messageAlert="La noticia se eliminó de la sección de noticias archivadas"
+        typeAlert="success"
+        hideTime={2000}
+      />
       <Loader open={isLoading} />
     </>
   );

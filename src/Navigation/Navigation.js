@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../views/Home/Home.view";
 import News from "../views/News/News.view";
@@ -7,53 +7,32 @@ import Register from "../views/Register/Register.view";
 import Login from "../views/Login/Login.view";
 import AddNews from "../views/AddNews/AddNews.view";
 import NavBar from "../components/NavBar/NavBar.component";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { app } from "../utils/Firebase";
-
-import { ThemeProvider } from "@mui/material/styles";
-import { customTheme } from "../utils/customTheme";
-import Footer from "../components/Footer/Footer.component";
-import NewsState from "../context/news/NewsState";
+import UserContext from "../context/user/UserContext";
 
 export function Navigation() {
-  const auth = getAuth(app);
-  const [userLogin, setUserLogin] = useState(false);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setTimeout(() => {
-        user ? setUserLogin(true) : setUserLogin(false);
-      }, 2000);
-    });
-  }, [userLogin]);
+  const userContext = useContext(UserContext);
+  const { isUserLogged } = userContext;
 
   return (
-    <>
-      <ThemeProvider theme={customTheme}>
-        <NewsState>
-          <Router>
-            <NavBar />
-            {userLogin ? (
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="news" element={<News />} />
-                <Route path="archivedNews" element={<ArchivedNews />} />
-                <Route path="addNews" element={<AddNews />} />
-                <Route path="*" element={<Home />} />
-              </Routes>
-            ) : (
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="news" element={<News />} />
-                <Route path="register" element={<Register />} />
-                <Route path="login" element={<Login />} />
-                <Route path="*" element={<Home />} />
-              </Routes>
-            )}
-          </Router>
-          <Footer />
-        </NewsState>
-      </ThemeProvider>
-    </>
+    <Router>
+      <NavBar />
+      {isUserLogged ? (
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="news" element={<News />} />
+          <Route path="archivedNews" element={<ArchivedNews />} />
+          <Route path="addNews" element={<AddNews />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="news" element={<News />} />
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      )}
+    </Router>
   );
 }

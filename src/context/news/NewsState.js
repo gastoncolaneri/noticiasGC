@@ -7,16 +7,19 @@ const NewsState = (props) => {
     changeCountryNews,
     changeTypeNews,
     deleteNews,
+    addNews,
     getNews,
     isLoading,
     allNews,
     archivedNews,
     countryNews,
     typeNews,
+    newsAdded,
   } = NewsActions();
 
   const value = {
     allNews,
+    newsAdded,
     archivedNews,
     typeNews,
     countryNews,
@@ -26,6 +29,7 @@ const NewsState = (props) => {
     getNews,
     archiveNews,
     deleteNews,
+    addNews,
   };
 
   return (

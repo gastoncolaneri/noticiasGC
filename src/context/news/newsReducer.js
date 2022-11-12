@@ -4,10 +4,12 @@ import {
   CHANGE_COUNTRY_NEWS,
   ARCHIVED_NEWS,
   DELETE_NEWS,
+  ADD_NEWS,
 } from "../types";
 
 export const newsInitialState = {
   allNews: [],
+  newsAdded: [],
   archivedNews: [],
   typeNews: "business",
   countryNews: "ar",
@@ -19,6 +21,8 @@ const newsReducer = (state, action) => {
   switch (type) {
     case GET_NEWS:
       return { ...state, allNews: payload };
+    case ADD_NEWS:
+      return { ...state, newsAdded: payload };
     case CHANGE_TYPE_NEWS:
       return { ...state, typeNews: payload };
     case CHANGE_COUNTRY_NEWS:

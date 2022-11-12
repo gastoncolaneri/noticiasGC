@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import { getAuth, signOut } from "firebase/auth";
 import Logo from "../../assets/NoticiasGC2.png";
 import { generalStyles } from "./NavBar.styles";
 import colors from "../../utils/colors";
@@ -16,17 +17,18 @@ import { Alert, Divider, Snackbar } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { app } from "../../utils/Firebase";
 
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import Loader from "../Loader/Loader.component";
+import UserContext from "../../context/user/UserContext";
 
 export default function NavBar() {
+  const userContext = useContext(UserContext);
+  const { isUserLogged, userLogout } = userContext;
   const classes = generalStyles();
   const auth = getAuth(app);
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [userLogin, setUserLogin] = useState(null);
   const [open, setOpen] = useState(false);
   const [openLoader, setOpenLoader] = useState(false);
   const [typeAlert, setTypeAlert] = useState("success");
@@ -81,6 +83,7 @@ export default function NavBar() {
         setOpen(true);
         setOpenLoader(true);
         setAnchorEl(null);
+        userLogout(false);
         setTimeout(() => {
           setOpenLoader(false);
           navigate("/");
@@ -93,15 +96,9 @@ export default function NavBar() {
       });
   };
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      user ? setUserLogin(true) : setUserLogin(false);
-    });
-  }, [auth, userLogin]);
-
   return (
     <>
-      <AppBar position="sticky" color="secondary">
+      <AppBar position="fixed" color="secondary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -163,7 +160,7 @@ export default function NavBar() {
               <LinkButton to="/">Inicio</LinkButton>
               <LinkButton to="/news">Noticias</LinkButton>
             </Box>
-            {userLogin ? (
+            {isUserLogged ? (
               <div>
                 <IconButton
                   size="large"
