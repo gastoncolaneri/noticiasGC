@@ -30,15 +30,15 @@ const NewsActions = () => {
 
   const getNews = async () => {
     setIsLoading(true);
-    const urlNews = `https://backend-noticias-gc.vercel.app/?country=${state.countryNews}&type=${state.typeNews}`;
+    const urlNews = `https://backend-noticias-gc.vercel.app/?country=${state?.countryNews}&type=${state?.typeNews}`;
     const request = await fetch(urlNews);
     const response = await request.json();
     const news = await response.articles;
     const tmpAddedNews = state.newsAdded.filter(
       (item) =>
-        item?.type === state.typeNews && item?.country === state.countryNews
+        item?.type === state?.typeNews && item?.country === state?.countryNews
     );
-    const tmpNews = news.map((item) => ({
+    const tmpNews = news?.map((item) => ({
       ...item,
       publishedAt: moment(item.publishedAt).format("LLL"),
     }));
@@ -53,18 +53,18 @@ const NewsActions = () => {
   const addNews = (news) => {
     dispatch({
       type: ADD_NEWS,
-      payload: [...state.newsAdded, news],
+      payload: [...state?.newsAdded, news],
     });
   };
 
   const archiveNews = (news) => {
-    const isArchived = state.archivedNews.find(
+    const isArchived = state?.archivedNews?.find(
       (item) => item?.url === news?.url
     );
 
     if (!isArchived) {
       setArchivedNewsLS(news);
-      const archivedNews = state.archivedNews.concat(news);
+      const archivedNews = state?.archivedNews?.concat(news);
       dispatch({
         type: ARCHIVED_NEWS,
         payload: archivedNews,
@@ -73,7 +73,7 @@ const NewsActions = () => {
   };
 
   const deleteNews = (news) => {
-    const archivedNews = state.archivedNews.filter(
+    const archivedNews = state?.archivedNews?.filter(
       (item) => item?.url !== news?.url
     );
     deleteArchivedNewsLS(news);
@@ -90,11 +90,11 @@ const NewsActions = () => {
     deleteNews,
     addNews,
     isLoading,
-    allNews: state.allNews,
-    newsAdded: state.newsAdded,
-    archivedNews: state.archivedNews,
-    typeNews: state.typeNews,
-    countryNews: state.countryNews,
+    allNews: state?.allNews,
+    newsAdded: state?.newsAdded,
+    archivedNews: state?.archivedNews,
+    typeNews: state?.typeNews,
+    countryNews: state?.countryNews,
   };
 };
 

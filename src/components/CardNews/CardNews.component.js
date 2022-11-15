@@ -38,7 +38,7 @@ export default function CarNews() {
   const archivedNews = getArchivedNewsLS();
 
   const isArchived = (news) => {
-    return archivedNews.find((item) => item?.url === news?.url);
+    return archivedNews?.find((item) => item?.url === news?.url);
   };
 
   const isTypeSelected = (value) => {
@@ -194,7 +194,7 @@ export default function CarNews() {
                       marginTop: 2,
                     }}
                   >
-                    {item.description}
+                    {item?.description || ""}
                   </Typography>
                   <Box textAlign="right">
                     <Typography variant="subtitle1">
