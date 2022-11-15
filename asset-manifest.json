@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/noticiasGC/static/js/main.2efeec99.js",
+    "main.js": "/noticiasGC/static/js/main.0b92ec0c.js",
     "static/media/Banner.png": "/noticiasGC/static/media/Banner.1740e546b82fdd713f9d.png",
     "index.html": "/noticiasGC/index.html",
-    "main.2efeec99.js.map": "/noticiasGC/static/js/main.2efeec99.js.map"
+    "main.0b92ec0c.js.map": "/noticiasGC/static/js/main.0b92ec0c.js.map"
   },
   "entrypoints": [
-    "static/js/main.2efeec99.js"
+    "static/js/main.0b92ec0c.js"
   ]
 }
