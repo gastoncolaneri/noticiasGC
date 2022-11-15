@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import {
   Button,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -13,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import NewsContext from "../../context/news/NewsContext";
-
 import { generalStyles } from "./AddNews.styles";
 import { useForm } from "react-hook-form";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar.component";
@@ -31,25 +31,35 @@ export default function Register() {
     country: "",
   });
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const hasEmptyInput = Object.values(formData).some((item) => !item);
+
+  const setInputData = (data) => {
+    setFormData({ ...formData, ...data });
+  };
 
   const onSubmit = () => {
-    const tmpNews = {
-      title: formData.title,
-      description: formData.description,
-      author: formData.author,
-      publishedAt: moment().format("LLL"),
-      type: formData.type,
-      country: formData.country,
-    };
-    setOpen(true);
-    addNews(tmpNews);
-    setFormData({
-      title: "",
-      author: "",
-      description: "",
-      type: "",
-      country: "",
-    });
+    setIsSubmitting(true);
+    if (!hasEmptyInput) {
+      const tmpNews = {
+        title: formData.title,
+        description: formData.description,
+        author: formData.author,
+        publishedAt: moment().format("LLL"),
+        type: formData.type,
+        country: formData.country,
+      };
+      setOpen(true);
+      setIsSubmitting(false);
+      addNews(tmpNews);
+      setFormData({
+        title: "",
+        author: "",
+        description: "",
+        type: "",
+        country: "",
+      });
+    }
   };
 
   return (
@@ -79,8 +89,12 @@ export default function Register() {
                       variant="outlined"
                       color="secondary"
                       value={formData.title}
-                      onChange={(e) =>
-                        setFormData({ ...formData, title: e.target.value })
+                      onChange={(e) => setInputData({ title: e.target.value })}
+                      error={isSubmitting && !formData.title}
+                      helperText={
+                        isSubmitting &&
+                        !formData.title &&
+                        "Por favor, ingrese un título"
                       }
                       fullWidth
                     />
@@ -94,8 +108,12 @@ export default function Register() {
                       variant="outlined"
                       color="secondary"
                       value={formData.author}
-                      onChange={(e) =>
-                        setFormData({ ...formData, author: e.target.value })
+                      onChange={(e) => setInputData({ author: e.target.value })}
+                      error={isSubmitting && !formData.author}
+                      helperText={
+                        isSubmitting &&
+                        !formData.author &&
+                        "Por favor, ingrese un autor"
                       }
                       fullWidth
                     />
@@ -106,6 +124,7 @@ export default function Register() {
                       required
                       color="secondary"
                       sx={{ textAlign: "left" }}
+                      error={isSubmitting && !formData.type}
                     >
                       <InputLabel id="type-select-label">Tipo</InputLabel>
                       <Select
@@ -113,14 +132,17 @@ export default function Register() {
                         id="type-select"
                         value={formData.type}
                         label="Tipo"
-                        onChange={(e) =>
-                          setFormData({ ...formData, type: e.target.value })
-                        }
+                        onChange={(e) => setInputData({ type: e.target.value })}
                       >
                         <MenuItem value="business">Negocios</MenuItem>
                         <MenuItem value="sports">Deportes</MenuItem>
                         <MenuItem value="health">Salud</MenuItem>
                       </Select>
+                      {isSubmitting && !formData.country && (
+                        <FormHelperText>
+                          Por favor, ingrese el tipo de noticia
+                        </FormHelperText>
+                      )}
                     </FormControl>
                   </Grid>
                   <Grid item xs={12} md={6}>
@@ -129,6 +151,7 @@ export default function Register() {
                       required
                       color="secondary"
                       sx={{ textAlign: "left" }}
+                      error={isSubmitting && !formData.country}
                     >
                       <InputLabel id="country-select-label">País</InputLabel>
                       <Select
@@ -137,13 +160,18 @@ export default function Register() {
                         value={formData.country}
                         label="País"
                         onChange={(e) =>
-                          setFormData({ ...formData, country: e.target.value })
+                          setInputData({ country: e.target.value })
                         }
                       >
                         <MenuItem value="ar">Argentina</MenuItem>
                         <MenuItem value="mx">México</MenuItem>
                         <MenuItem value="us">Estados Unidos</MenuItem>
                       </Select>
+                      {isSubmitting && !formData.country && (
+                        <FormHelperText>
+                          Por favor, ingrese el país de la noticia
+                        </FormHelperText>
+                      )}
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
@@ -154,10 +182,13 @@ export default function Register() {
                       color="secondary"
                       value={formData.description}
                       onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          description: e.target.value,
-                        })
+                        setInputData({ description: e.target.value })
+                      }
+                      error={isSubmitting && !formData.description}
+                      helperText={
+                        isSubmitting &&
+                        !formData.description &&
+                        "Por favor, ingrese una descripción"
                       }
                       rows={3}
                       multiline

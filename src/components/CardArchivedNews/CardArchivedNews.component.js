@@ -22,7 +22,7 @@ export default function CardArchivedNews() {
             {archivedNews.length ? (
               archivedNews.map((item, index) => {
                 return (
-                  <Grid xs={12} className={classes.card} key={index}>
+                  <Grid xs={12} className={classes.card} key={index} item>
                     <Box>
                       <Tooltip title="Eliminar noticia">
                         <DeleteForeverOutlinedIcon

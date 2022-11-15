@@ -17,7 +17,7 @@ import CustomSnackbar from "../Snackbar/CustomSnackbar.component";
 import UserContext from "../../context/user/UserContext";
 import { getArchivedNewsLS } from "../../utils/localStorage";
 
-export default function CarNews() {
+const CardNews = () => {
   const newsContext = useContext(NewsContext);
   const {
     getNews,
@@ -158,7 +158,7 @@ export default function CarNews() {
           </Stack>
           {news.map((item) => {
             return (
-              <Grid xs={12} className={classes.card} key={item?.url}>
+              <Grid xs={12} className={classes.card} key={item?.url} item>
                 <Box>
                   {isUserLogged && (
                     <Tooltip
@@ -220,4 +220,6 @@ export default function CarNews() {
       <Loader open={isLoading} />
     </Box>
   );
-}
+};
+
+export default CardNews;

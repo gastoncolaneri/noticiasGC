@@ -3,19 +3,19 @@
   "name": "Portal Noticias GC",
   "icons": [
     {
-      "src": "../src/assets/NoticiasGC2.png",
+      "src": "images/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "../src/assets/NoticiasGC2.png",
+      "src": "images/NoticiasGC192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "../src/assets/NoticiasGC2.png",
+      "src": "images/NoticiasGC.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "500x500"
     }
   ],
   "start_url": ".",
