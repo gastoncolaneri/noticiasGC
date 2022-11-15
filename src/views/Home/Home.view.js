@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { generalStyles } from "./Home.styles";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -12,6 +12,7 @@ export default function Home() {
   const userContext = useContext(UserContext);
   const { isUserLogged } = userContext;
   const classes = generalStyles();
+
   const LinkButton = (props) => {
     return (
       <Button

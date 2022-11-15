@@ -30,9 +30,9 @@ const NewsActions = () => {
 
   const getNews = async () => {
     setIsLoading(true);
-    const urlNews = `https://newsapi.org/v2/top-headlines?country=${state.countryNews}&category=${state.typeNews}&apiKey=e3b5b11d4944459fac8192812ab214c4&sortBy=publishedAt`;
-    const apiRequest = await fetch(urlNews);
-    const response = await apiRequest.json();
+    const urlNews = `https://backend-noticias-gc.vercel.app/?country=${state.countryNews}&type=${state.typeNews}`;
+    const request = await fetch(urlNews);
+    const response = await request.json();
     const news = await response.articles;
     const tmpAddedNews = state.newsAdded.filter(
       (item) =>
