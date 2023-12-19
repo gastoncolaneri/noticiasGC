@@ -3,7 +3,7 @@ import NewsActions from "./NewsActions";
 
 const NewsState = (props) => {
   const {
-    archiveNews,
+    favoriteNews,
     changeCountryNews,
     changeTypeNews,
     deleteNews,
@@ -11,7 +11,7 @@ const NewsState = (props) => {
     getNews,
     isLoading,
     allNews,
-    archivedNews,
+    favoritedNews,
     countryNews,
     typeNews,
     newsAdded,
@@ -20,14 +20,14 @@ const NewsState = (props) => {
   const value = {
     allNews,
     newsAdded,
-    archivedNews,
+    favoritedNews,
     typeNews,
     countryNews,
     isLoading: isLoading,
     changeTypeNews,
     changeCountryNews,
     getNews,
-    archiveNews,
+    favoriteNews,
     deleteNews,
     addNews,
   };

@@ -197,11 +197,11 @@ export default function NavBar() {
                   <Divider />
 
                   <LinkButton
-                    to="/archivedNews"
+                    to="/favoritedNews"
                     sx={{ color: colors.COLOR_SECUNDARIO, display: "block" }}
                     onClick={handleClose}
                   >
-                    Noticias archivada
+                    Noticias favoritas
                   </LinkButton>
                   <Divider />
 

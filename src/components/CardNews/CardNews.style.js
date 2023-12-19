@@ -10,10 +10,11 @@ export const generalStyles = makeStyles((theme) => ({
     padding: 15,
     boxShadow: "3px 5px 5px #9E9E9E",
     backgroundColor: colors.LIGHTORANGE,
-    marginBottom: 20,
+    marginBottom: "20px !important",
     width: "100%",
   },
   container: {
     width: "100%",
+    backgroundColor: colors.COLOR_PRINCIPAL,
   },
 }));

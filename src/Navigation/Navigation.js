@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../views/Home/Home.view";
 import News from "../views/News/News.view";
-import ArchivedNews from "../views/ArchivedNews/ArchivedNews.view";
 import Register from "../views/Register/Register.view";
 import Login from "../views/Login/Login.view";
 import AddNews from "../views/AddNews/AddNews.view";
 import NavBar from "../components/NavBar/NavBar.component";
 import UserContext from "../context/user/UserContext";
+import FavoritedNews from "../views/FavoritedNews/FavoritedNews";
 
 export function Navigation() {
   const userContext = useContext(UserContext);
@@ -20,7 +20,7 @@ export function Navigation() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="news" element={<News />} />
-          <Route path="archivedNews" element={<ArchivedNews />} />
+          <Route path="favoritedNews" element={<FavoritedNews />} />
           <Route path="addNews" element={<AddNews />} />
           <Route path="*" element={<Home />} />
         </Routes>

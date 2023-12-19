@@ -2,12 +2,12 @@
 
 ## _¿Qué es Noticias GC?_
 
-Es una página web donde podrás encontrar las últimas noticias del mundo. Al registrarte e iniciar sesión, tendrás la posibilidad de archivar las noticias que no te interesen.
+Es una página web donde podrás encontrar las últimas noticias del mundo. Al registrarte e iniciar sesión, tendrás la posibilidad de marcar como favorito las noticias que te interesen.
 
 ## _¿Qué funcionalidades tiene?_
 
 - Registro y login.
-- Archivar noticias que no sean de tu interés (en construcción)
+- Marcar como favoritas las noticias que sean de tu interés
 - Búsqueda de noticias por etiquetas específicas
 
 ### _¿Querés probarla?_

@@ -6,28 +6,28 @@ export const setUserLoggedLS = (isLogged) => {
   localStorage.setItem("userLogged", isLogged.toString());
 };
 
-export const setArchivedNewsLS = (archivedNews) => {
+export const setFavoritedNewsLS = (favoritedNews) => {
   let tmpListNews = [];
-  const actualArchivedNews = JSON.parse(localStorage.getItem("archivedNews"));
-  if (actualArchivedNews) {
-    tmpListNews = actualArchivedNews;
-    tmpListNews.push(archivedNews);
+  const actualFavoritedNews = JSON.parse(localStorage.getItem("favoritedNews"));
+  if (actualFavoritedNews) {
+    tmpListNews = actualFavoritedNews;
+    tmpListNews.push(favoritedNews);
   } else {
-    tmpListNews.push(archivedNews);
+    tmpListNews.push(favoritedNews);
   }
   const parser = JSON.stringify(tmpListNews);
-  localStorage.setItem("archivedNews", parser);
+  localStorage.setItem("favoritedNews", parser);
 };
 
-export const getArchivedNewsLS = () => {
-  return JSON.parse(localStorage.getItem("archivedNews"));
+export const getFavoritedNewsLS = () => {
+  return JSON.parse(localStorage.getItem("favoritedNews"));
 };
 
-export const deleteArchivedNewsLS = (archivedNews) => {
-  const actualArchivedNews = JSON.parse(localStorage.getItem("archivedNews"));
-  const tmpArchivedNews = actualArchivedNews.filter(
-    (item) => item?.url !== archivedNews?.url
+export const deleteFavoritedNewsLS = (favoritedNews) => {
+  const actualFavoritedNews = JSON.parse(localStorage.getItem("favoritedNews"));
+  const tmpFavoritedNews = actualFavoritedNews.filter(
+    (item) => item?.url !== favoritedNews?.url
   );
-  const parser = JSON.stringify(tmpArchivedNews);
-  localStorage.setItem("archivedNews", parser);
+  const parser = JSON.stringify(tmpFavoritedNews);
+  localStorage.setItem("favoritedNews", parser);
 };

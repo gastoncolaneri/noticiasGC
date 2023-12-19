@@ -40,7 +40,7 @@ export default function Home() {
               <Typography variant="h3">Bienvenido a Noticias GC!</Typography>
               <Typography variant="h6">
                 En este portal vas a encontrar las últimas noticias del mundo,
-                teniendo la posibilidad de archivar aquellas que no son de tu
+                teniendo la posibilidad de marcar como favoritas aquellas que son de tu
                 interés.
               </Typography>
               <Grid item xs={12} sx={{ marginTop: 2, marginBottom: 4 }}>
