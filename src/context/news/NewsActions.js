@@ -5,13 +5,13 @@ import {
   GET_NEWS,
   CHANGE_TYPE_NEWS,
   CHANGE_COUNTRY_NEWS,
-  ARCHIVED_NEWS,
+  FAVORITED_NEWS,
   DELETE_NEWS,
   ADD_NEWS,
 } from "../types";
 import {
-  deleteArchivedNewsLS,
-  setArchivedNewsLS,
+  deleteFavoritedNewsLS,
+  setFavoritedNewsLS,
 } from "../../utils/localStorage";
 
 const NewsActions = () => {
@@ -57,42 +57,42 @@ const NewsActions = () => {
     });
   };
 
-  const archiveNews = (news) => {
-    const isArchived = state?.archivedNews?.find(
+  const favoriteNews = (news) => {
+    const isFavorited = state?.favoritedNews?.find(
       (item) => item?.url === news?.url
     );
 
-    if (!isArchived) {
-      setArchivedNewsLS(news);
-      const archivedNews = state?.archivedNews?.concat(news);
+    if (!isFavorited) {
+      setFavoritedNewsLS(news);
+      const favoritedNews = state?.favoritedNews?.concat(news);
       dispatch({
-        type: ARCHIVED_NEWS,
-        payload: archivedNews,
+        type: FAVORITED_NEWS,
+        payload: favoritedNews,
       });
     }
   };
 
   const deleteNews = (news) => {
-    const archivedNews = state?.archivedNews?.filter(
+    const favoritedNews = state?.favoritedNews?.filter(
       (item) => item?.url !== news?.url
     );
-    deleteArchivedNewsLS(news);
+    deleteFavoritedNewsLS(news);
     dispatch({
       type: DELETE_NEWS,
-      payload: archivedNews,
+      payload: favoritedNews,
     });
   };
   return {
     changeTypeNews,
     changeCountryNews,
     getNews,
-    archiveNews,
+    favoriteNews,
     deleteNews,
     addNews,
     isLoading,
     allNews: state?.allNews,
     newsAdded: state?.newsAdded,
-    archivedNews: state?.archivedNews,
+    favoritedNews: state?.favoritedNews,
     typeNews: state?.typeNews,
     countryNews: state?.countryNews,
   };

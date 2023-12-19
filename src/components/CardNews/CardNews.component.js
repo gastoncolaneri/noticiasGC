@@ -9,13 +9,14 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { generalStyles } from "./CardNews.style";
 import Loader from "../Loader/Loader.component";
 import NewsContext from "../../context/news/NewsContext";
 import CustomSnackbar from "../Snackbar/CustomSnackbar.component";
 import UserContext from "../../context/user/UserContext";
-import { getArchivedNewsLS } from "../../utils/localStorage";
+import { getFavoritedNewsLS } from "../../utils/localStorage";
 
 const CardNews = () => {
   const newsContext = useContext(NewsContext);
@@ -27,7 +28,8 @@ const CardNews = () => {
     typeNews,
     countryNews,
     isLoading,
-    archiveNews,
+    favoriteNews,
+    deleteNews,
   } = newsContext;
   const userContext = useContext(UserContext);
   const { isUserLogged } = userContext;
@@ -35,10 +37,10 @@ const CardNews = () => {
   const [news, setNews] = useState([]);
   const [open, setOpen] = useState(false);
 
-  const archivedNews = getArchivedNewsLS();
+  const favoritedNews = getFavoritedNewsLS();
 
-  const isArchived = (news) => {
-    return archivedNews?.find((item) => item?.url === news?.url);
+  const isFavorite = (news) => {
+    return favoritedNews?.find((item) => item?.url === news?.url);
   };
 
   const isTypeSelected = (value) => {
@@ -49,10 +51,10 @@ const CardNews = () => {
     return value === countryNews;
   };
   const handleClick = (news) => {
-    if (isArchived(news)) {
-      return;
+    if (isFavorite(news)) {
+      deleteNews(news);
     }
-    archiveNews(news);
+    favoriteNews(news);
     setOpen(true);
   };
 
@@ -163,18 +165,28 @@ const CardNews = () => {
                   {isUserLogged && (
                     <Tooltip
                       title={
-                        isArchived(item)
-                          ? "Noticia ya archivada"
-                          : "Archivar noticia"
+                        isFavorite(item)
+                          ? "Noticia agregada a favoritos"
+                          : "Agregar noticia a favoritos"
                       }
                     >
-                      <ArchiveOutlinedIcon
-                        color={isArchived(item) ? "disabled" : "secondary"}
-                        sx={{ marginRight: 2 }}
-                        onClick={() => {
-                          handleClick(item);
-                        }}
-                      />
+                      {isFavorite(item) ? (
+                        <FavoriteIcon
+                          color={"secondary"}
+                          sx={{ marginRight: 2, cursor: "pointer" }}
+                          onClick={() => {
+                            handleClick(item);
+                          }}
+                        />
+                      ) : (
+                        <FavoriteBorderIcon
+                          color={"secondary"}
+                          sx={{ marginRight: 2, cursor: "pointer" }}
+                          onClick={() => {
+                            handleClick(item);
+                          }}
+                        />
+                      )}
                     </Tooltip>
                   )}
                   <Typography
@@ -213,7 +225,7 @@ const CardNews = () => {
       <CustomSnackbar
         isOpen={open}
         setIsOpen={setOpen}
-        messageAlert="La noticia se agregó a la sección de noticias archivadas"
+        messageAlert="La noticia se agregó a la sección de favoritos"
         typeAlert="success"
         hideTime={3000}
       />

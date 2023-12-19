@@ -2,7 +2,7 @@ import {
   GET_NEWS,
   CHANGE_TYPE_NEWS,
   CHANGE_COUNTRY_NEWS,
-  ARCHIVED_NEWS,
+  FAVORITED_NEWS,
   DELETE_NEWS,
   ADD_NEWS,
 } from "../types";
@@ -10,7 +10,7 @@ import {
 export const newsInitialState = {
   allNews: [],
   newsAdded: [],
-  archivedNews: [],
+  favoritedNews: [],
   typeNews: "business",
   countryNews: "ar",
   isLoading: false,
@@ -27,10 +27,10 @@ const newsReducer = (state, action) => {
       return { ...state, typeNews: payload };
     case CHANGE_COUNTRY_NEWS:
       return { ...state, countryNews: payload };
-    case ARCHIVED_NEWS:
-      return { ...state, archivedNews: payload };
+    case FAVORITED_NEWS:
+      return { ...state, favoritedNews: payload };
     case DELETE_NEWS:
-      return { ...state, archivedNews: payload };
+      return { ...state, favoritedNews: payload };
     default:
       return state;
   }
